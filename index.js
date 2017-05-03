@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+'use strict';
+
 const Table = require('cli-table');
 const chalk = require('chalk');
 const request = require('request');
