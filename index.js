@@ -1,14 +1,21 @@
 const Table = require('cli-table');
 const chalk = require('chalk');
-// instantiate
+const request = require('request');
+
+const Game = require('./components/game');
+
 const table = new Table({
-  head: [chalk.white('teams'), chalk.white('time'), chalk.white('time')],
+  head: [chalk.white('teams'), chalk.white('time'), chalk.white('score')],
 });
 
-// table is an Array, so you can `push`, `unshift`, `splice` and friends
-table.push(
-  ['First value', chalk.red('Second value')]
-  , ['First value', 'Second value']
-);
-
-console.log(table.toString());
+request('http://data.nba.com/data/5s/v2015/json/mobile_teams/nba/2016/scores/00_todays_scores.json', (error, response, body) => {
+  const data = JSON.parse(body).gs.g;
+  const games = [];
+  data.forEach((item) => {
+    games.push(new Game(item));
+  });
+  games.forEach((game) => {
+    table.push([game.getTeams(), game.time, game.getScores()]);
+  });
+  console.log(table.toString());
+});
