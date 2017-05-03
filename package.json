@@ -20,6 +20,10 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aconanlai/nba-scores-cli/"
+  },
   "bin": {
     "nba": "./index.js"
   }
